@@ -1,0 +1,22 @@
+{
+  "name": "oakie",
+  "version": "0.1.0",
+  "description": "Simple tree methods",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcoats/oakie.git"
+  },
+  "keywords": [
+    "tree"
+  ],
+  "author": "Thomas Coats <thomas.coats@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcoats/oakie/issues"
+  },
+  "homepage": "https://github.com/tcoats/oakie#readme"
+}
