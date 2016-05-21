@@ -16,20 +16,24 @@ module.exports =
     parent = tree
     index = tree
     for n in leaf
-      index[n] = {} if !index[n]?
+      return if !index[n]?
       parent = index
       index = index[n]
-      index = index[trunk] if trunk?
+      if trunk?
+        return if !index[trunk]?
+        index = index[trunk]
     delete parent[leaf[leaf.length - 1]]
 
   select: (tree, leaf, trunk) ->
     result = tree
     index = tree
     for n in leaf
-      index[n] = {} if !index[n]?
+      return null if !index[n]?
       index = index[n]
       result = index
-      index = index[trunk] if trunk?
+      if trunk?
+        return null if !index[trunk]?
+        index = index[trunk]
     result
 
   visit: (tree, trunk, fn) ->
@@ -44,8 +48,10 @@ module.exports =
 
   dive: (tree, trunk, path, fn) ->
     index = tree
+    result = []
     path.map (n) ->
+      return result if !index[n]
       index = index[n]
-      res = fn index, n
+      result.push fn index, n
+      return result if !index[trunk]
       index = index[trunk]
-      res
