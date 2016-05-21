@@ -55,3 +55,4 @@ module.exports =
       result.push fn index, n
       return result if !index[trunk]
       index = index[trunk]
+    result

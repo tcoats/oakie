@@ -101,5 +101,6 @@ module.exports = {
       }
       index = index[trunk];
     }
+    return result;
   }
 };
