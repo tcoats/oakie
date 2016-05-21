@@ -49,7 +49,7 @@ module.exports =
   dive: (tree, trunk, path, fn) ->
     index = tree
     result = []
-    path.map (n) ->
+    for n in path
       return result if !index[n]
       index = index[n]
       result.push fn index, n

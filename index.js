@@ -86,10 +86,11 @@ module.exports = {
     return result;
   },
   dive: function(tree, trunk, path, fn) {
-    var index, result;
+    var i, index, len, n, result;
     index = tree;
     result = [];
-    return path.map(function(n) {
+    for (i = 0, len = path.length; i < len; i++) {
+      n = path[i];
       if (!index[n]) {
         return result;
       }
@@ -98,7 +99,7 @@ module.exports = {
       if (!index[trunk]) {
         return result;
       }
-      return index = index[trunk];
-    });
+      index = index[trunk];
+    }
   }
 };
