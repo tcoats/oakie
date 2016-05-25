@@ -46,6 +46,16 @@ module.exports =
     module.exports.visit tree, trunk, (key, value) -> result[key] = value
     result
 
+  invert: (tree, trunk) ->
+    result = {}
+    visit = (base, node) ->
+      for key, value of node
+        next = base.concat [value]
+        result[key] = next
+        visit next, value[trunk] if value[trunk]?
+    visit [], tree
+    result
+
   dive: (tree, trunk, path, fn) ->
     index = tree
     result = []

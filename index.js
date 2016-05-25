@@ -85,6 +85,27 @@ module.exports = {
     });
     return result;
   },
+  invert: function(tree, trunk) {
+    var result, visit;
+    result = {};
+    visit = function(base, node) {
+      var key, next, results, value;
+      results = [];
+      for (key in node) {
+        value = node[key];
+        next = base.concat([value]);
+        result[key] = next;
+        if (value[trunk] != null) {
+          results.push(visit(next, value[trunk]));
+        } else {
+          results.push(void 0);
+        }
+      }
+      return results;
+    };
+    visit([], tree);
+    return result;
+  },
   dive: function(tree, trunk, path, fn) {
     var i, index, len, n, result;
     index = tree;
