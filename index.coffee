@@ -50,7 +50,7 @@ module.exports =
     result = {}
     visit = (base, node) ->
       for key, value of node
-        next = base.concat [value]
+        next = base.concat [key: key, value: value]
         result[key] = next
         visit next, value[trunk] if value[trunk]?
     visit [], tree

@@ -93,7 +93,12 @@ module.exports = {
       results = [];
       for (key in node) {
         value = node[key];
-        next = base.concat([value]);
+        next = base.concat([
+          {
+            key: key,
+            value: value
+          }
+        ]);
         result[key] = next;
         if (value[trunk] != null) {
           results.push(visit(next, value[trunk]));
