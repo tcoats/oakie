@@ -16,12 +16,15 @@ module.exports =
     parent = tree
     index = tree
     for n in leaf
+      break if !index?
       return if !index[n]?
       parent = index
       index = index[n]
       if trunk?
-        return if !index[trunk]?
-        index = index[trunk]
+        if !index[trunk]?
+          index = null
+        else
+          index = index[trunk]
     delete parent[leaf[leaf.length - 1]]
 
   select: (tree, leaf, trunk) ->

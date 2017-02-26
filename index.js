@@ -29,6 +29,9 @@ module.exports = {
     index = tree;
     for (i = 0, len = leaf.length; i < len; i++) {
       n = leaf[i];
+      if (index == null) {
+        break;
+      }
       if (index[n] == null) {
         return;
       }
@@ -36,9 +39,10 @@ module.exports = {
       index = index[n];
       if (trunk != null) {
         if (index[trunk] == null) {
-          return;
+          index = null;
+        } else {
+          index = index[trunk];
         }
-        index = index[trunk];
       }
     }
     return delete parent[leaf[leaf.length - 1]];
