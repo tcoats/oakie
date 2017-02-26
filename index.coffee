@@ -28,12 +28,15 @@ module.exports =
     result = tree
     index = tree
     for n in leaf
+      return result if !index?
       return null if !index[n]?
       index = index[n]
       result = index
       if trunk?
-        return null if !index[trunk]?
-        index = index[trunk]
+        if !index[trunk]?
+          index = null
+        else
+          index = index[trunk]
     result
 
   visit: (tree, trunk, fn) ->

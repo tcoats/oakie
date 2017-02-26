@@ -49,6 +49,9 @@ module.exports = {
     index = tree;
     for (i = 0, len = leaf.length; i < len; i++) {
       n = leaf[i];
+      if (index == null) {
+        return result;
+      }
       if (index[n] == null) {
         return null;
       }
@@ -56,9 +59,10 @@ module.exports = {
       result = index;
       if (trunk != null) {
         if (index[trunk] == null) {
-          return null;
+          index = null;
+        } else {
+          index = index[trunk];
         }
-        index = index[trunk];
       }
     }
     return result;
