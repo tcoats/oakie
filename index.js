@@ -136,5 +136,29 @@ module.exports = {
       index = index[trunk];
     }
     return result;
+  },
+  sort: function(node, trunk, fn) {
+    var i, item, key, keys, len, result, sorted, value;
+    keys = Object.keys(node);
+    sorted = keys.map(function(key) {
+      return {
+        key: key,
+        value: node[key]
+      };
+    });
+    sorted.sort(fn);
+    result = {};
+    for (i = 0, len = sorted.length; i < len; i++) {
+      item = sorted[i];
+      result[item.key] = item.value;
+    }
+    for (key in result) {
+      value = result[key];
+      if (!value[trunk]) {
+        continue;
+      }
+      value[trunk] = module.exports.sort(value[trunk], trunk, fn);
+    }
+    return result;
   }
 };

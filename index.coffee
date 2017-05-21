@@ -72,3 +72,17 @@ module.exports =
       return result if !index[trunk]
       index = index[trunk]
     result
+
+  sort: (node, trunk, fn) ->
+    keys = Object.keys node
+    sorted = keys.map (key) ->
+      key: key
+      value: node[key]
+    sorted.sort fn
+    result = {}
+    for item in sorted
+      result[item.key] = item.value
+    for key, value of result
+      continue if !value[trunk]
+      value[trunk] = module.exports.sort value[trunk], trunk, fn
+    result
